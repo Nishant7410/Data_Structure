@@ -69,7 +69,7 @@ public class SinglyLinkedList<E extends Comparable<E>>
 
   /** Number of nodes in the list */
   private int size = 0;                      // number of nodes in the list
-
+  private Node<E> pal=null;
 
   /** Constructs an initially empty list. */
   public SinglyLinkedList() { }              // constructs an initially empty list
@@ -325,35 +325,34 @@ public class SinglyLinkedList<E extends Comparable<E>>
       
   }
   
-   /*public boolean check(Node<E>slow,Node<E>fast)
+   public boolean check(Node<E>slow,Node<E>fast)
   {
-  static Node<E> temp;
+  //static Node<E> temp;
   if(fast==null)
   {
-  temp=slow;
-  return true;
-  }
-  else if(fast->next==null)
-  {
-    temp=slow->next;
+    pal=slow;
     return true;
   }
-  else
+  else if(fast.getNext()==null)
   {
-  boolen result=check(slow->next,fast->next->next);
-  if(result==true)
-  {
-  if(slow->data==temp->data)
-  {
-  temp=temp->next;
-  return true;
+    pal=slow.getNext();
+    return true;
   }
-  else
-  return false;
-  }
-  else
-  return false;
-  }
+  
+        boolean result=check(slow.getNext(),fast.getNext().getNext());
+        if(result==true)
+        {
+            if(slow.getElement()==pal.getElement())
+            {
+                pal=pal.getNext();
+                return true;
+            }
+            else
+            return false;
+        }
+        else
+        return false;
+  
   }
   public void checkpalindrome()
   {
@@ -369,7 +368,7 @@ public class SinglyLinkedList<E extends Comparable<E>>
   else
   System.out.print("Not Palindrome");
   
-  }*/
+  }
   /**
    * Produces a string representation of the contents of the list.
    * This exists for debugging purposes only.
