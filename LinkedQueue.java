@@ -1,6 +1,6 @@
 import DS.*;
 import Nishant_DS.*;
-public class LinkedQueue<E> implements Queue<E> 
+public class LinkedQueue<E extends Comparable<E>> implements Queue<E> 
 {
   /** The primary storage for elements of the queue */
   private SinglyLinkedList<E> list = new SinglyLinkedList<>();   // an empty  list
