@@ -130,7 +130,6 @@ public class SinglyLinkedList<E extends Comparable<E>>
         size++;
     }
   }
-
   public void insertBetween(E e,int index)
   {
    if(index==0)
@@ -191,7 +190,7 @@ public class SinglyLinkedList<E extends Comparable<E>>
       return temp.getElement();
   }
 
-  public void reverse()
+  public void reverseiteratively()  //reverse iteratively
   {
     Node<E> temp=head;
     Node<E> prev=null;
@@ -207,7 +206,95 @@ public class SinglyLinkedList<E extends Comparable<E>>
     head=prev;
     tail=temp;
   }
-
+  
+  public void reverserec(Node<E>slow,Node<E>fast)
+  {
+  //static Node<E> temp;
+  if(fast==null)
+  {
+    pal=slow;
+    return;
+  }
+  else if(fast.getNext()==null)
+  {
+    pal=slow.getNext();
+    return;
+  }
+  
+        reverserec(slow.getNext(),fast.getNext().getNext());
+        int temp=slow.getElement();
+        slow.setElement(pal.getElement());
+        pal.setElement(temp);
+        return;
+  }
+  public void reverserecursively()
+{
+    reverserec(head,head);
+}
+  public int midElement(Node<E>slow,Node<E>fast)
+  {
+  //static Node<E> temp;
+  if(fast==null)
+  {
+    return slow.getElement();
+  }
+  else if(fast.getNext()==null)
+  {
+    return slow.getElement();
+  }
+  
+        return midElement(slow.getNext(),fast.getNext().getNext());
+        
+  }
+ int middleElement()
+ {
+ int m=midElement(head,head);
+ return m;
+ }
+ public void addfirstlast(Node<E>slow,Node<E>fast)
+ {
+    if(fast==null)
+  {
+    pal=slow;
+    return;
+  }
+  else if(fast.getNext()==null)
+  {
+    pal=slow.getNext();
+    return;
+  }
+  
+        addfirstlast(slow.getNext(),fast.getNext().getNext());
+        int temp=slow.getElement()+pal.getElement();
+        slow.setElement(temp);
+        pal.setElement(temp);
+        return;
+ }
+ public void add()
+ {
+ addfirstlast(head,head);
+ }
+ int NnodeFromEnd(int i)
+ {
+ int c=0;
+ Node<E> temp=head;
+ while(temp!=null)
+ {
+ c++;
+ temp=temp.getNext();
+ }
+ c=c-i;
+ i=0;
+ temp=head;
+ while(temp!=null)
+ {
+ if(i==c)
+ break;
+ i++;
+ temp=temp.getNext();
+ }
+ return temp.getElement();
+ }
   public void sort()
   {
     Node<E> start=head;
