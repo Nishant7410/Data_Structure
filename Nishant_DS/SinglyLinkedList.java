@@ -295,6 +295,49 @@ public class SinglyLinkedList<E extends Comparable<E>>
  }
  return temp.getElement();
  }
+ 
+ public removeloop(Node<E>head,Node<E>node)
+ {
+ Node<E> ptr1=head;
+ Node<E> ptr2;
+ int c=1;
+ while(c==1)
+ {
+  ptr2=node;
+  while(ptr2.getNext()!=node&&ptr2.getNext()!=ptr1)
+  ptr2.getNext();
+  if(ptr2.getNext()==ptr1)
+  break;
+  ptr1=ptr1.getNext();
+ }
+ ptr2.setNext(null);
+ }
+ 
+ public boolean RemoveandDetectLoop()
+ {
+  Node<E> p=head;
+  int c=0;
+  Node<E> q=head;
+  while(p!=null&&q!=null&&p.getNext())
+  {
+     p=p.getNext().getNext();
+     q=q.getNext();
+     if(p==q)
+     {
+     break;
+     }
+  }
+  if(p!=q)
+  return false;
+  q=head;
+  while(p!=q)
+  {
+  q=q.getNext();
+  p=p.getNext();
+  }
+  removeloop(head,p);
+  return true;
+ }
   public void sort()
   {
     Node<E> start=head;
